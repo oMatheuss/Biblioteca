@@ -11,7 +11,7 @@ namespace Biblioteca.Helpers
     {
         public static string ConnectionString()
         {
-            return "server=http://localhost:3306/;user id=root;password=uniube22;database=biblioteca";
+            return "server=127.0.0.1;user=root;password=uniube22;database=biblioteca";
         }
 
         public static MySqlConnection Connection()
@@ -19,6 +19,7 @@ namespace Biblioteca.Helpers
             try
             {
                 return new MySqlConnection(ConnectionString());
+                //return new MySqlConnection(ConnectionString());
             }
             catch (Exception)
             {

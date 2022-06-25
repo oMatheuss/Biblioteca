@@ -7,8 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Biblioteca.Daos;
-using Biblioteca.Daos.LivroUsuarioDao;
+using Biblioteca.LivroUsuarioDal;
 
 namespace Biblioteca
 {
@@ -19,7 +18,7 @@ namespace Biblioteca
         {
             InitializeComponent();
             ds = new();
-            dataGridView1.DataSource = ds;
+            dataGridView1.AutoGenerateColumns = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -28,18 +27,36 @@ namespace Biblioteca
             
             if (radioButton1.Checked)
             {
-                ds = new UsuarioDao.UsuarioDao().ListarUsuarios();
-                
+                ds = new UsuarioDal.UsuarioDal().ListarUsuarios();
+                dataGridView1.DataSource = ds.Tables[0];
             } 
             else if (radioButton2.Checked) 
             {
-                ds = new LivroDao.LivroDao().ListarLivros();
+                ds = new LivroDal.LivroDal().ListarLivros();
+                dataGridView1.DataSource = ds.Tables[0];
             } 
             else if (radioButton3.Checked)
             {
-                ds = new LivroUsuarioDao().listarEmprestimos();
+                ds = new LivroUsuarioDal.LivroUsuarioDal().listarEmprestimos();
+                dataGridView1.DataSource = ds.Tables[0];
             }
             dataGridView1.Refresh();
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var form = new AddBook();
+            form.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var form = new AddUser();
+            form.Show();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
